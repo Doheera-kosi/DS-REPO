@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<!-- saved from url=(0153)https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/labs/Module%205/5_Peer_Graded.md.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./5_Peer_Graded.md_files/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./5_Peer_Graded.md_files/default.min.css">
+  <style type="text/css">/* this file is used for labs on cognitiveclass.ai that were written in markdown */
+
+/* applies to images, i.e. "![]()" in markdown */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* add padding and margins */
+body {
+  padding: 10px;
+  margin: 10px;
+}
+
+/* applies to tables, i.e. "|--|--|" in markdown */
+table td,
+table th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+/* applies to using quotes, i.e. ">" in markdown */
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 1em 10px 0.1em 10px;
+  quotes: '\201C''\201D''\2018''\2019';
+}
+
+/* the headers need some spacing */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  padding-top: 20px;
+}
+
+/* Add padding between nested list item */
+ul > li > ul {
+  padding-bottom: 1rem;
+}
+
+.code-badge-language {
+  display: none;
+}
+.code-badge-copy-icon {
+  background: url('data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhciIgZGF0YS1pY29uPSJjb3B5IiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY29weSBmYS13LTE0IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ0OCA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTQzMy45NDEgNjUuOTQxbC01MS44ODItNTEuODgyQTQ4IDQ4IDAgMCAwIDM0OC4xMTggMEgxNzZjLTI2LjUxIDAtNDggMjEuNDktNDggNDh2NDhINDhjLTI2LjUxIDAtNDggMjEuNDktNDggNDh2MzIwYzAgMjYuNTEgMjEuNDkgNDggNDggNDhoMjI0YzI2LjUxIDAgNDgtMjEuNDkgNDgtNDh2LTQ4aDgwYzI2LjUxIDAgNDgtMjEuNDkgNDgtNDhWOTkuODgyYTQ4IDQ4IDAgMCAwLTE0LjA1OS0zMy45NDF6TTI2NiA0NjRINTRhNiA2IDAgMCAxLTYtNlYxNTBhNiA2IDAgMCAxIDYtNmg3NHYyMjRjMCAyNi41MSAyMS40OSA0OCA0OCA0OGg5NnY0MmE2IDYgMCAwIDEtNiA2em0xMjgtOTZIMTgyYTYgNiAwIDAgMS02LTZWNTRhNiA2IDAgMCAxIDYtNmgxMDZ2ODhjMCAxMy4yNTUgMTAuNzQ1IDI0IDI0IDI0aDg4djIwMmE2IDYgMCAwIDEtNiA2em02LTI1NmgtNjRWNDhoOS42MzJjMS41OTEgMCAzLjExNy42MzIgNC4yNDMgMS43NTdsNDguMzY4IDQ4LjM2OGE2IDYgMCAwIDEgMS43NTcgNC4yNDNWMTEyeiI+PC9wYXRoPjwvc3ZnPg==');
+  background-size: 100% 100%;
+}
+
+.code-badge {
+  bottom: 0 !important;
+  top: unset !important;
+  background: unset !important;
+}
+
+.code-badge > .code-badge-check-icon {
+  background: green;
+}
+.code-badge-check-icon {
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0 7px;
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGFyaWEtaGlkZGVuPSJ0cnVlIiBmb2N1c2FibGU9ImZhbHNlIiBkYXRhLXByZWZpeD0iZmFzIiBkYXRhLWljb249ImNoZWNrIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY2hlY2sgZmEtdy0xNiIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9IiYjMTA7ICAgIGNvbG9yOiAjMmFmZjMyOyYjMTA7Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0xNzMuODk4IDQzOS40MDRsLTE2Ni40LTE2Ni40Yy05Ljk5Ny05Ljk5Ny05Ljk5Ny0yNi4yMDYgMC0zNi4yMDRsMzYuMjAzLTM2LjIwNGM5Ljk5Ny05Ljk5OCAyNi4yMDctOS45OTggMzYuMjA0IDBMMTkyIDMxMi42OSA0MzIuMDk1IDcyLjU5NmM5Ljk5Ny05Ljk5NyAyNi4yMDctOS45OTcgMzYuMjA0IDBsMzYuMjAzIDM2LjIwNGM5Ljk5NyA5Ljk5NyA5Ljk5NyAyNi4yMDYgMCAzNi4yMDRsLTI5NC40IDI5NC40MDFjLTkuOTk4IDkuOTk3LTI2LjIwNyA5Ljk5Ny0zNi4yMDQtLjAwMXoiLz48L3N2Zz4=');
+  background-size: 100% 100%;
+}
+</style><style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu72xKOzY.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu5mxKOzY.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu7mxKOzY.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4WxKOzY.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu7WxKOzY.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu7GxKOzY.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fCRc4EsA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fABc4EsA.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fCBc4EsA.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBxc4EsA.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fCxc4EsA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fChc4EsA.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBBc4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfCRc4EsA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfABc4EsA.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfCBc4EsA.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBxc4EsA.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfCxc4EsA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfChc4EsA.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style><style type="text/css">
+@font-face {
+  font-weight: 400;
+  font-style:  normal;
+  font-family: 'Circular-Loom';
+
+  src: url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/CircularXXWeb-Book.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 500;
+  font-style:  normal;
+  font-family: 'Circular-Loom';
+
+  src: url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/CircularXXWeb-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 700;
+  font-style:  normal;
+  font-family: 'Circular-Loom';
+
+  src: url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/CircularXXWeb-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 900;
+  font-style:  normal;
+  font-family: 'Circular-Loom';
+
+  src: url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/CircularXXWeb-Black.woff2') format('woff2');
+}</style></head>
+  <body><span id="warning-container"><i data-reactroot=""></i></span>
+    <h1>Assignment Overview</h1>
+    <center>
+      <img src="./5_Peer_Graded.md_files/SN_web_lightmode.png" width="300" alt="cognitiveclass.ai logo">
+    </center>
+    <ul>
+      <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/labs/Module%205/5_Peer_Graded.md.html#story">Story</a></li>
+      <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/labs/Module%205/5_Peer_Graded.md.html#components-of-the-report-items">Components of the report items</a></li>
+      <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/labs/Module%205/5_Peer_Graded.md.html#expected-layout">Expected layout</a></li>
+      <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/labs/Module%205/5_Peer_Graded.md.html#requirements-to-create-the-dashboard">Requirements to create the dashboard</a></li>
+      <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/labs/Module%205/5_Peer_Graded.md.html#what-is-new-in-this-exercise-compared-to-other-labs?">What is new in this exercise compared to other labs?</a></li>
+      <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/labs/Module%205/5_Peer_Graded.md.html#review">Review</a></li>
+      <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/labs/Module%205/5_Peer_Graded.md.html#hints-to-complete-todos">Hints to complete TODOs</a></li>
+    </ul>
+    <p><strong>Estimated time needed:</strong> 45 minutes</p>
+    <h1>About Skills Network Cloud IDE</h1>
+    <p>
+      This Skills Network Labs Cloud IDE (Integrated Development Environment) provides a hands-on environment in your web browser for completing course and project related labs. It utilizes Theia, an open-source IDE platform, that can be run on desktop or on the cloud.
+      So far in the course you have been using Jupyter notebooks to run your python code. This IDE provides an alternative for editing and running your Python code. In this lab you will be using this alternative Python runtime to create and launch your Dash applications.
+    </p>
+    <h3>Important Notice about this lab environment</h3>
+    <p>Please be aware that sessions for this lab environment are not persisted. When you launch the Cloud IDE, you are presented with a 'dedicated computer on the cloud' exclusively for you. This is available to you as long as you are actively working on the labs.</p>
+    <p>Once you close your session or it is timed out due to inactivity, you are logged off, and this 'dedicated computer on the cloud' is deleted along with any files you may have created, dowloaded or installed. The next time you launch this lab, a new environment is created for you.</p>
+    <p><em>If you finish only part of the lab and return later, you may have to start from the beginning. So, it is a good idea to plan to your time accordingly and finish your labs in a single session.</em></p>
+    <h1>Story:</h1>
+    <p>As a data analyst, you have been given a task to monitor and report US domestic airline flights performance. Goal is to analyze the performance of the reporting airline to improve flight reliability thereby improving customer reliability.</p>
+    <p>Below are the key report items,</p>
+    <ul>
+      <li>Yearly airline performance report</li>
+      <li>Yearly average flight delay statistics</li>
+    </ul>
+    <p><em>NOTE:</em> Year range is between 2005 and 2020.</p>
+    <h2>Components of the report items</h2>
+    <ol>
+      <li>
+        <p>Yearly airline performance report</p>
+        <p>For the chosen year provide,</p>
+        <ul>
+          <li>Number of flights under different cancellation categories using bar chart.</li>
+          <li>Average flight time by reporting airline using line chart.</li>
+          <li>Percentage of diverted airport landings per reporting airline using pie chart.</li>
+          <li>Number of flights flying from each state using choropleth map.</li>
+          <li>Number of flights flying to each state from each reporting airline using treemap chart.</li>
+        </ul>
+      </li>
+      <li>
+        <p>Yearly average flight delay statistics</p>
+        <p>For the chosen year provide,</p>
+        <ul>
+          <li>Monthly average carrier delay by reporting airline for the given year.</li>
+          <li>Monthly average weather delay by reporting airline for the given year.</li>
+          <li>Monthly average national air system delay by reporting airline for the given year.</li>
+          <li>Monthly average security delay by reporting airline for the given year.</li>
+          <li>Monthly average late aircraft delay by reporting airline for the given year.</li>
+        </ul>
+        <p><em>NOTE:</em> You have worked created the same dashboard components in <code>Flight Delay Time Statistics Dashboard</code> section. We will be reusing the same.</p>
+      </li>
+    </ol>
+    <h2>Expected Layout</h2>
+    <p>
+      <img src="./5_Peer_Graded.md_files/Layout.png" alt="">
+    </p>
+    <h2>Requirements to create the expected result</h2>
+    <ul>
+      <li>Two dropdown <a href="https://dash.plotly.com/dash-core-components/dropdown?utm_medium=Exinfluencer&amp;utm_source=Exinfluencer&amp;utm_content=000026UJ&amp;utm_term=10006555&amp;utm_id=NA-SkillsNetwork-Channel-SkillsNetworkCoursesIBMDeveloperSkillsNetworkDV0101ENSkillsNetwork970-2022-01-01" target="_blank" rel="external">menus</a>: For choosing report type and year</li>
+      <li>Each dropdown will be designed as follows:
+        <ul>
+          <li>An outer division with two inner divisions (as shown in the expected layout)</li>
+          <li>One of the inner divisions will have information about the dropdown and the other one is dropdown.</li>
+        </ul>
+      </li>
+      <li>Layout for adding graphs.</li>
+      <li>Callback function to compute data, create graph and return to the layout.</li>
+    </ul>
+    <h1>Get the application skeleton</h1>
+    <ul>
+      <li>Copy and paste the below command in the terminal to download the skeleton.</li>
+    </ul>
+    <pre class="code-badge-pre"><div class="code-badge">
+        <div class="code-badge-language">awk</div>
+        <div title="Copy to clipboard">
+            <i class="code-badge-copy-icon code-badge-copy-icon"></i>
+        </div>
+     </div><code class="hljs language-awk">wget https:<span class="hljs-regexp">//</span>cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud<span class="hljs-regexp">/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/</span>labs<span class="hljs-regexp">/Module%205/</span><span class="hljs-number">5</span>_Peer_Graded_Assignment_Questions.py
+</code></pre>
+    <p></p>
+    <p>
+      <img src="./5_Peer_Graded.md_files/get_file.png" alt="">
+    </p>
+    <ul>
+      <li>Open <code>5_Peer_Graded_Assignment_Questions.py</code></li>
+    </ul>
+    <p>
+      <img src="./5_Peer_Graded.md_files/open_file.png" alt="">
+    </p>
+    <p>You can use this as a base code to complete the task below.</p>
+    <h2>What's new in this exercise compared to other labs?</h2>
+    <ul>
+      <li>
+        <p>Make sure the layout is clean without any default graphs or graph layouts. We will do this by 3 changes:</p>
+        <ol>
+          <li>Having empty html.Div and use the callback to Output the dcc.graph as the Children of that Div.</li>
+          <li>
+            Add a state variable in addition to callback decorator input and output parameter. This will allow us to pass extra values without firing the callbacks.
+            Here, we need to pass two inputs <code>chart type</code> and <code>year</code>. Input is read only after user entering all the information.
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p>Use new html display style <code>flex</code> to arrange the dropdown menu with description.</p>
+      </li>
+      <li>
+        <p>Update app run step to avoid getting error message before initiating callback.</p>
+      </li>
+    </ul>
+    <p><em>NOTE:</em> These steps are only for review.</p>
+    <h1>Let's create the application</h1>
+    <h2>Review</h2>
+    <p>Search/Look for <code>Review</code> word in the script to learn how commands are used and computations are carried out. There are 7 review items.</p>
+    <ul>
+      <li>REVIEW1: Clear the layout and do not display exception till callback gets executed.</li>
+      <li>REVIEW2: Dropdown creation.</li>
+      <li>REVIEW3: Observe how we add an empty division and providing an id that will be updated during callback.</li>
+      <li>REVIEW4: Holding output state till user enters all the form information. In this case, it will be chart type and year.</li>
+      <li>REVIEW5: Number of flights flying from each state using choropleth</li>
+      <li>REVIEW6: Return dcc.Graph component to the empty division</li>
+      <li>REVIEW7: This covers chart type 2 and we have completed this exercise under Flight Delay Time Statistics Dashboard section</li>
+    </ul>
+    <h1>Hints to complete TASKS</h1>
+    <p>Search/Look for <code>TASK</code> word in the script to identify places where you need to complete the code.</p>
+    <h1>TASK1: Add title to the dashboard</h1>
+    <ul>
+      <li>Provide title of the dash application title as <code>US Domestic Airline Flights Performance</code>.</li>
+      <li>
+        Make the heading center aligned, set color as <code>#503D36</code>, and font size as <code>24</code>.
+        Sample: style={'textAlign': 'left', 'color': '#000000', 'font-size': 0}
+      </li>
+    </ul>
+    <p>Reference <a href="https://dash.plotly.com/dash-html-components/h1?utm_medium=Exinfluencer&amp;utm_source=Exinfluencer&amp;utm_content=000026UJ&amp;utm_term=10006555&amp;utm_id=NA-SkillsNetwork-Channel-SkillsNetworkCoursesIBMDeveloperSkillsNetworkDV0101ENSkillsNetwork970-2022-01-01" target="_blank" rel="external">link</a></p>
+    <h1>TASK2: Add a dropdown menu</h1>
+    <p>Create a dropdown menu and add two chart options to it. Below is the skeleton:</p>
+    <pre class="code-badge-pre"><div class="code-badge">
+        <div class="code-badge-language">scheme</div>
+        <div title="Copy to clipboard">
+            <i class="code-badge-copy-icon code-badge-copy-icon"></i>
+        </div>
+     </div><code class="hljs language-scheme">  dcc.Dropdown(<span class="hljs-name">id=</span><span class="hljs-symbol">'....</span>', 
+                   options=[
+                           {<span class="hljs-symbol">'label</span><span class="hljs-symbol">':</span> <span class="hljs-symbol">'....</span>', <span class="hljs-symbol">'value</span><span class="hljs-symbol">':</span> <span class="hljs-symbol">'...</span>'},
+                           {<span class="hljs-symbol">'label</span><span class="hljs-symbol">':</span> <span class="hljs-symbol">'....</span>', <span class="hljs-symbol">'value</span><span class="hljs-symbol">':</span> <span class="hljs-symbol">'...</span>'}
+                           ],
+                  placeholder=<span class="hljs-symbol">'....</span>',
+                  style={....})
+</code></pre>
+    <p>Parameters to be updated in <code>dcc.Dropdown</code>:</p>
+    <ul>
+      <li>
+        <p>Set <code>id</code> as <code>input-type</code>.</p>
+      </li>
+      <li>
+        <p>Set <code>options</code> to list containing dictionaries with key as <code>label</code> and user provided value for labels in <code>value</code>.</p>
+        <p><em>1st dictionary</em></p>
+        <ul>
+          <li>label: Yearly Airline Performance Report</li>
+          <li>value: OPT1</li>
+        </ul>
+        <p><em>2nd dictionary</em></p>
+        <ul>
+          <li>label: Yearly Airline Delay Report</li>
+          <li>value: OPT2</li>
+        </ul>
+      </li>
+      <li>
+        <p>Set placeholder to <code>Select a report type</code>.</p>
+      </li>
+      <li>
+        <p>Set width as <code>80%</code>, padding as <code>3px</code>, font size as <code>20px</code>, text-align-last as <code>center</code> inside style parameter dictionary.</p>
+      </li>
+    </ul>
+    <p>Reference <a href="https://dash.plotly.com/dash-core-components/dropdown?utm_medium=Exinfluencer&amp;utm_source=Exinfluencer&amp;utm_content=000026UJ&amp;utm_term=10006555&amp;utm_id=NA-SkillsNetwork-Channel-SkillsNetworkCoursesIBMDeveloperSkillsNetworkDV0101ENSkillsNetwork970-2022-01-01" target="_blank" rel="external">link</a></p>
+    <h1>TASK3: Add a division with two empty divisions inside.</h1>
+    <p>Add a division with two empty divisions inside. For reference, observe how code under <code>REVIEW3</code> has been structured.</p>
+    <p>Provide division ids as <code>plot4</code> and <code>plot5</code>. Display style as <code>flex</code>.</p>
+    <h1>TASK4: Add 5 ouput components</h1>
+    <p>Our layout has 5 outputs so we need to create 5 output components. Review how input components are constructed to fill in for output component.</p>
+    <p>It is a list with 5 output parameters with component id and property. Here, the component property will be <code>children</code> as we have created empty division and passing in <code>dcc.Graph</code> (figure) after computation.</p>
+    <p>Component ids will be <code>plot1</code> , <code>plot2</code>, <code>plot2</code>, <code>plot4</code>, and <code>plot5</code>. Skeleton is provided below:</p>
+    <pre class="code-badge-pre"><div class="code-badge">
+        <div class="code-badge-language">scheme</div>
+        <div title="Copy to clipboard">
+            <i class="code-badge-copy-icon code-badge-copy-icon"></i>
+        </div>
+     </div><code class="hljs language-scheme">[<span class="hljs-name">Output</span>(<span class="hljs-name">component_id=</span><span class="hljs-symbol">'plot1</span>', component_property=<span class="hljs-symbol">'children</span>'),
+ Output(<span class="hljs-name">....</span>),
+ Output(<span class="hljs-name">....</span>),
+ Output(<span class="hljs-name">....</span>),
+ Output(<span class="hljs-name">....</span>)]
+</code></pre>
+    <h1>TASK5: Average flight time by reporting airline</h1>
+    <p>Create a line plot using returned dataframe <code>line_data</code> from the above function <code>compute_data_choice</code> using <code>plotly.express</code>. Link for reference is <a href="https://plotly.com/python/line-charts/?utm_medium=Exinfluencer&amp;utm_source=Exinfluencer&amp;utm_content=000026UJ&amp;utm_term=10006555&amp;utm_id=NA-SkillsNetwork-Channel-SkillsNetworkCoursesIBMDeveloperSkillsNetworkDV0101ENSkillsNetwork970-2022-01-01" target="_blank" rel="external">here</a></p>
+    <p>Set:</p>
+    <ul>
+      <li>Figure name as <code>line_fig</code></li>
+      <li>Input data as <code>line_data</code></li>
+      <li>x as <code>Month</code>, y as <code>AirTime</code>, color as <code>Reporting_Airline</code> and <code>title</code> as <code>Average monthly flight time (minutes) by airline</code>.</li>
+    </ul>
+    <p>Below is the skeleton:</p>
+    <pre class="code-badge-pre"><div class="code-badge">
+        <div class="code-badge-language">routeros</div>
+        <div title="Copy to clipboard">
+            <i class="code-badge-copy-icon code-badge-copy-icon"></i>
+        </div>
+     </div><code class="hljs language-routeros">figure_name = px.line(input_data, <span class="hljs-attribute">x</span>=<span class="hljs-string">'....'</span>, <span class="hljs-attribute">y</span>=<span class="hljs-string">'...'</span>, <span class="hljs-attribute">color</span>=<span class="hljs-string">'...'</span>, <span class="hljs-attribute">title</span>=<span class="hljs-string">'....'</span>)
+</code></pre>
+    <h1>TASK6: Number of flights flying to each state from each reporting airline</h1>
+    <p>Create a treemap plot using returned dataframe <code>tree_data</code> from the above function <code>compute_data_choice</code> using <code>plotly.express</code>. Link for reference is <a href="https://plotly.com/python/treemaps/?utm_medium=Exinfluencer&amp;utm_source=Exinfluencer&amp;utm_content=000026UJ&amp;utm_term=10006555&amp;utm_id=NA-SkillsNetwork-Channel-SkillsNetworkCoursesIBMDeveloperSkillsNetworkDV0101ENSkillsNetwork970-2022-01-01" target="_blank" rel="external">here</a></p>
+    <p>Set</p>
+    <ul>
+      <li>Figure name as <code>tree_fig</code></li>
+      <li>Data as <code>tree_data</code></li>
+      <li>Path as <code>['DestState', 'Reporting_Airline']</code></li>
+      <li>Values as <code>Flights</code></li>
+      <li>Colors as <code>Flights</code> and color_continuous_scale as <code>'RdBu'</code></li>
+      <li>Title as <code>'Flight count by airline to destination state'</code></li>
+    </ul>
+    <p>Below is the skeleton:</p>
+    <pre class="code-badge-pre"><div class="code-badge">
+        <div class="code-badge-language">ini</div>
+        <div title="Copy to clipboard">
+            <i class="code-badge-copy-icon code-badge-copy-icon"></i>
+        </div>
+     </div><code class="hljs language-ini"><span class="hljs-attr"><span class="hljs-attr">tree_fig</span></span> = px.treemap(data, path=[<span class="hljs-string"><span class="hljs-string">'...'</span></span>, <span class="hljs-string"><span class="hljs-string">'...'</span></span>], 
+                      <span class="hljs-attr"><span class="hljs-attr">values</span></span>=<span class="hljs-string"><span class="hljs-string">'...'</span></span>,
+                      <span class="hljs-attr"><span class="hljs-attr">color</span></span>=<span class="hljs-string"><span class="hljs-string">'...'</span></span>,
+                      <span class="hljs-attr"><span class="hljs-attr">color_continuous_scale</span></span>=<span class="hljs-string"><span class="hljs-string">'...'</span></span>,
+                      <span class="hljs-attr"><span class="hljs-attr">title</span></span>=<span class="hljs-string"><span class="hljs-string">'...'</span></span>
+                )
+</code></pre>
+    <h1>Run the Application</h1>
+    <ul>
+      <li>Firstly, install pandas and dash using the following command</li>
+    </ul>
+    <pre class="code-badge-pre"><div class="code-badge">
+        <div class="code-badge-language">cmake</div>
+        <div title="Copy to clipboard">
+            <i class="code-badge-copy-icon code-badge-copy-icon"></i>
+        </div>
+     </div><code class="hljs language-cmake">python3 -m pip <span class="hljs-keyword">install</span> pandas dash
+</code></pre>
+    <p></p>
+    <ul>
+      <li>Run the python file using the command</li>
+    </ul>
+    <pre class="code-badge-pre"><div class="code-badge">
+        <div class="code-badge-language">vim</div>
+        <div title="Copy to clipboard">
+            <i class="code-badge-copy-icon code-badge-copy-icon"></i>
+        </div>
+     </div><code class="hljs language-vim"><span class="hljs-keyword">python3</span> <span class="hljs-number">5</span>_Peer_Graded_Assignment_Questions.<span class="hljs-keyword">py</span>
+</code></pre>
+    <p></p>
+    <ul>
+      <li>Observe the port number shown in the terminal.</li>
+    </ul>
+    <p>
+      <img src="./5_Peer_Graded.md_files/port.png" alt="">
+    </p>
+    <ul>
+      <li>Click on the <code>Launch Application</code> option from the side menu bar. Provide the port number and click <code>OK</code></li>
+    </ul>
+    <p>
+      <img src="./5_Peer_Graded.md_files/launch_application_new.PNG" alt="">
+    </p>
+    <h3>Congratulations, you have successfully completed your application!</h3>
+    <h2>Author</h2>
+    <p><a href="https://www.linkedin.com/in/saishruthi-swaminathan?utm_medium=Exinfluencer&amp;utm_source=Exinfluencer&amp;utm_content=000026UJ&amp;utm_term=10006555&amp;utm_id=NA-SkillsNetwork-Channel-SkillsNetworkCoursesIBMDeveloperSkillsNetworkDV0101ENSkillsNetwork970-2022-01-01&amp;cm_mmc=Email_Newsletter-_-Developer_Ed%2BTech-_-WW_WW-_-SkillsNetwork-Courses-IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork-20297740&amp;cm_mmca1=000026UJ&amp;cm_mmca2=10006555&amp;cm_mmca3=M12345678&amp;cvosrc=email.Newsletter.M12345678&amp;cvo_campaign=000026UJ" target="_blank" rel="external">Saishruthi Swaminathan</a></p>
+    <h2>Changelog</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Version</th>
+          <th>Changed by</th>
+          <th>Change Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>05-10-2021</td>
+          <td>1.0</td>
+          <td>Saishruthi</td>
+          <td>Initial version created</td>
+        </tr>
+        <tr>
+          <td>29-08-2022</td>
+          <td>1.1</td>
+          <td>Pratiksha Verma</td>
+          <td>Updated Screenshot</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2></h2>
+    <h3 align="center">© IBM Corporation 2020. All rights reserved.</h3>
+    <h3></h3>
+    <script>window.addEventListener('load', function() {
+snFaculty.inject();
+});</script>
+    <script src="./5_Peer_Graded.md_files/inject.43989f87.js.download"></script>
+    <script src="./5_Peer_Graded.md_files/highlight.min.js.download"></script>
+    <script src="./5_Peer_Graded.md_files/highlightjs-badge.min.js.download"></script>
+  
+
+<style>
+@media print {
+   .code-badge { display: none; }
+}
+    .code-badge-pre {
+        position: relative;
+    }
+    .code-badge {
+        display: flex;
+        flex-direction: row;
+        white-space: normal;
+        background: transparent;
+        background: #333;
+        color: white;
+        font-size: 0.875em;
+        opacity: 0.5;
+        transition: opacity linear 0.5s;
+        border-radius: 0 0 0 7px;
+        padding: 5px 8px 5px 8px;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .code-badge.active {
+        opacity: 0.8;
+    }
+
+    .code-badge:hover {
+        opacity: .95;
+    }
+
+    .code-badge a,
+    .code-badge a:hover {
+        text-decoration: none;
+    }
+
+    .code-badge-language {
+        margin-right: 10px;
+        font-weight: 600;
+        color: goldenrod;
+    }
+    .code-badge-copy-icon {
+        font-size: 1.2em;
+        cursor: pointer;
+        padding: 0 7px;
+        margin-top:2;
+    }
+    .fa.text-success:{ color: limegreen !important }
+</style><div id="CodeBadgeTemplate" style="display:none">
+    <div class="code-badge">
+        <div class="code-badge-language">{{language}}</div>
+        <div title="Copy to clipboard">
+            <i class="{{copyIconClass}} code-badge-copy-icon"></i>
+        </div>
+     </div>
+</div><div id="wot-new-assistant-container"><div data-reactroot=""></div></div></body><loom-container id="lo-engage-ext-container"><loom-shadow classname="resolved"></loom-shadow></loom-container><loom-container id="lo-companion-container"><loom-shadow classname="resolved"></loom-shadow></loom-container></html>
